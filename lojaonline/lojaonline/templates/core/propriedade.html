@@ -1,0 +1,29 @@
+{% block title  %}
+{% endblock title %}
+
+{% block body %}
+<div class="container">
+    <h1> Template Lista Propriedade </h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Proprietário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{propriedades.id}} - </th>
+                        <td>{{propriedades.nomeProp}} - </td>
+                        <td>{{propriedades.produtor.nomeProd}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
