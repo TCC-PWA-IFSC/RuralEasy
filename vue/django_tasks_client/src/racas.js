@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/racas/"; // URL da sua API Django
+//const API_URL = "http://localhost:8000/racas/"; // URL da sua API Django
+const API_URL = "https://8af2-138-186-119-107.ngrok.io/racas/"; // URL da sua API Django
 
 export class ApiService {
   // Obter todos os produtores rurais

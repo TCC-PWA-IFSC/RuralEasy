@@ -75,7 +75,7 @@
   submitForm() {
     if (this.isEdit) {
       console.log("Aqui", this.raca.id)
-      axios.put(`http://localhost:8000/racas/editar/${this.raca.id}/`, this.raca)
+      axios.put(`https://8af2-138-186-119-107.ngrok.io/racas/editar/${this.raca.id}/`, this.raca)
         .then(response => {
           this.racas = response.data;
           this.isEdit = false; // Redefinir o estado de edição pra não dar ruim
@@ -88,7 +88,7 @@
         });
     } else {
       console.log('Método POST')
-      axios.post('http://localhost:8000/racas/', this.raca)
+      axios.post('https://8af2-138-186-119-107.ngrok.io/racas/', this.raca)
         .then(response => {
           this.racas = response.data;
           this.raca = {
@@ -105,7 +105,7 @@
   },
   
       deleteRaca() {
-        axios.delete(`http://localhost:8000/racas/deleteraca/${this.raca.id}/`)
+        axios.delete(`https://8af2-138-186-119-107.ngrok.io/racas/deleteraca/${this.raca.id}/`)
           .then(response => {
             this.racas = response.data
           })
@@ -118,7 +118,7 @@
         this.racaToDelete = raca
       },
       deleteRacaConfirmed() {
-        axios.delete(`http://localhost:8000/racas/deleteraca/${this.racaToDelete.id}/`)
+        axios.delete(`https://8af2-138-186-119-107.ngrok.io/racas/deleteraca/${this.racaToDelete.id}/`)
           .then(response => {
             this.racas = response.data
             this.showDeleteModal = false
@@ -137,7 +137,7 @@
         window.location.href = '/racas'
       },
       fetchRaca(id) {
-        axios.get(`http://localhost:8000/racas/${id}/`)
+        axios.get(`https://8af2-138-186-119-107.ngrok.io/racas/${id}/`)
           .then(response => {
             this.raca = response.data
           })
@@ -148,7 +148,7 @@
     },
     
     mounted() {
-      axios.get('http://localhost:8000/racas/')
+      axios.get('https://8af2-138-186-119-107.ngrok.io/racas/')
         .then(response => {
           this.racas = response.data
         })
