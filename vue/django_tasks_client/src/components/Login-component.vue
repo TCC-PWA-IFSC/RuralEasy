@@ -1,20 +1,19 @@
-<!-- Não há mudanças no template -->
-...
-
 <script>
 import axios from "axios";
+
+//LOGIN - PARA IMPLEMENTAÇÕES FUTURAS
 
 export default {
     data() {
         return {
-            username: "",  // Este corresponde ao campo "Usuário" do Produtor
-            password: ""   // Este corresponde ao campo "Senha" do Produtor
+            username: "",  
+            password: ""   
         };
     },
     methods: {
         async login() {
             try {
-                const response = await axios.post("YOUR_DJANGO_BACKEND_URL/auth/token/login/", {
+                const response = await axios.post("127.0.0.1/auth/token/login/", {
                     username: this.username,
                     password: this.password
                 });

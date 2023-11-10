@@ -1,11 +1,6 @@
 from django import forms
 from .models import ProdutorRural, PropriedadeRural, Raca, Lote, Animal, Veterinario, ProdSanitario, Venda, ComprarAnimal, Ocorrencias, Inseminacao, Movimentacao, ProdutoAlimenticio, Suplementacao, Pesagem, OutraDespesa, AplicarProdutoSanitario, CompraProdutos
-#from django.utils.functional import LazyReference
 
-#AnimalFormLazy = LazyReference('core.forms', 'AnimalForm')
-
-#- Tabela 1 - Produtor Rural (Nome, CPF, e-mail).
-#- Tabela 2 - Propriedade Rural (Nome, Produtor)
 class ProdutorRuralForm(forms.ModelForm):
         class Meta:
             model = ProdutorRural
@@ -15,7 +10,6 @@ class PropriedadeRuralForm(forms.ModelForm):
         class Meta:
             model = PropriedadeRural
             fields = ['nomeProp', 'produtor', 'endereco', 'latitude', 'longitude', 'tamanhoAreaProducao']
-            #fields = ['nomeProp', 'nomeProd'] -> produtor no models
 
 class LoteForm(forms.ModelForm):
         class Meta:

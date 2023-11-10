@@ -2,26 +2,25 @@
     <div class="container">
       <h2>Cadastro de Lotes</h2>
       <form @submit.prevent="submitForm">
-        <div>
-          <label for="nomeLote">Nome:</label>
+        <div class="form-group">
+          <label for="nomeLote">Nome</label>
           <input type="text" id="nomeLote" v-model="lote.nomeLote" required>
         </div>
-        <div>
-        <label for="tipoCultivo">Tipo do Cultivo:</label>
+        <div class="left-label">
+        <label for="tipoCultivo">Tipo do Cultivo&nbsp;</label>
           <select id="tipoCultivo" v-model="lote.tipoCultivo" required>
             <option value="">Selecione um tipo de cultivo</option>
             <option v-for="cultivo in tiposDeCultivo" :value="cultivo" :key="cultivo">{{ cultivo }}</option>
           </select>
         </div>
-        <div>
-        <label for="propriedade">Propriedade:</label>
+        <div class="left-label1">
+        <label for="propriedade">Propriedade&nbsp;</label>
           <select id="propriedade" v-model="lote.idProp" required>
             <option value="">Selecione uma propriedade</option>
             <option v-for="idProp in propriedades" :value="idProp.id" :key="idProp.id">{{ idProp.nomeProp }}</option>
           </select>
         </div>
         <button type="submit">Salvar</button>
-        <!-----<button v-if="isEdit" @click.prevent="deleteLote">Excluir</button>-->
         <button v-if="isEdit" @click.prevent="cancelEdit">Cancelar</button>
       </form>
     </div>
@@ -85,7 +84,7 @@
     },
     methods: {
   
-       //editar 
+  //editar 
   editLote(lote) {
     this.isEdit = true;
     this.lote = { ...lote};
@@ -211,10 +210,41 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* Base para aplicar a fonte em todo o componente */
 .container {
     font-family: 'Poppins', sans-serif;
     text-align: center;
+}
+
+.left-label {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: -15px; 
+}
+
+.left-label1 {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: 7px; 
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-group label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
 }
 
 button {
@@ -224,14 +254,14 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); /* verde */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); 
 
     &:hover {
-        background-color: #218838; /* verde escuro */
-        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); /* verde escuro */
+        background-color: #218838; 
+        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); 
     }
 }
 
@@ -240,13 +270,11 @@ div {
 }
 
 .botaoConfirmaDelete {
-    /* ... estilos existentes ... */
     background-color: rgba(0,0,0,0.7);
     color: #FFF;
 }
 
 .buttons-container {
-    /* ... estilos existentes ... */
     padding: 20px;
 }
 
@@ -259,43 +287,40 @@ h1 {
 }
 
 table {
-    /* ... estilos existentes ... */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     width: 100%;
 }
 
 .table {
-    width: 90%; /* Isso limita a tabela a 90% da largura do viewport, mas você pode ajustar conforme preferir */
-    margin: 0 auto; /* Isso centraliza a div da tabela */
+    width: 90%; 
+    margin: 0 auto; 
 }
 
 th, td {
-    /* ... estilos existentes ... */
     font-weight: 400;
 }
 
 th {
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
 }
 
 tr:nth-child(odd) {
-    background-color: #e6f4ea; /* verde claro */
+    background-color: #e6f4ea; 
 }
 
 tr:hover {
-    background-color: #d1ecd5; /* verde mais claro */
+    background-color: #d1ecd5; 
 }
 
 .container {
-    /* ... estilos existentes ... */
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background-color: #FFF;
 }
 
 form, .table, .botaoConfirmaDelete {
-    display: inline-block;
+    
     width: 100%;
     text-align: center;
 }
@@ -303,6 +328,10 @@ form, .table, .botaoConfirmaDelete {
 
 h1, h2 {
     width: 100%;
+}
+
+h2 {
+  text-align: center;
 }
 
 </style>

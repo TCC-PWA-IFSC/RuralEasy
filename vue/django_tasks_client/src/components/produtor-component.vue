@@ -2,32 +2,31 @@
     <div class="container">
       <h2>Cadastro de Produtor Rural</h2>
       <form @submit.prevent="submitForm">
-        <div>
-          <label for="nomeProd">Nome:</label>
+        <div class="form-group">
+          <label for="nomeProd">Nome</label>
           <input type="text" id="nomeProd" v-model="produtor.nomeProd" required>
         </div>
-        <div>
+        <div class="form-group">
           <label for="cpf">CPF</label>
           <input type="cpf" id="cpf" v-model="produtor.cpf" required>
         </div>
-        <div>
-          <label for="email">E-mail:</label>
+        <div class="form-group">
+          <label for="email">E-mail</label>
           <input type="email" id="email" v-model="produtor.email" required>
         </div>
-        <div>
-          <label for="telefone">Telefone:</label>
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
           <input type="telefone" id="telefone" v-model="produtor.telefone" required>
         </div>
-        <div>
-          <label for="user">Usuário:</label>
+        <div class="form-group">
+          <label for="user">Usuário</label>
           <input type="user" id="user" v-model="produtor.user" required>
         </div>
-        <div>
-          <label for="password">Senha:</label>
+        <div class="form-group">
+          <label for="password">Senha</label>
           <input type="password" id="password" v-model="produtor.password" required>
         </div>
         <button type="submit">Salvar</button>
-        <!--<button v-if="isEdit" @click.prevent="deletePropriedade">Excluir</button>-->
         <button v-if="isEdit" @click.prevent="cancelEdit">Cancelar</button>
       </form>
     </div>
@@ -88,7 +87,7 @@
     },
     methods: {
   
-       //editar 
+  //editar 
   editProdutor(produtor) {
     this.isEdit = true;
     this.produtor = { ...produtor };
@@ -146,11 +145,6 @@
             console.log(error)
           })
       },
-      //confirmDelete(propriedade) {
-      //  console.log("Que tem aqui?", propriedade)
-      //  this.showDeleteModal = true
-      //  this.propriedadeToDelete = propriedade
-      //}
       confirmDelete(produtor) {
         if (window.confirm("Você tem certeza de que deseja excluir este produtor?")) {
           this.produtorToDelete = produtor;
@@ -187,14 +181,6 @@
           })
       }
     },
-    /*mounted() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      if (id) {
-        this.isEdit = true
-        this.fetchProdutor(id)
-      }
-    }*/
     
     mounted() {
       axios.get('http://localhost:8000/produtores/')
@@ -204,31 +190,6 @@
         .catch(error => {
           console.log(error)
         })
-  
-        /*post
-        axios.post('/api/produtores/', this.form)
-        .then(response => {
-          this.form = response.data
-        })
-        catch(error => {
-          console.log(error)
-        })
-  
-        axios.put(`http://localhost:8000/produtores/${this.produtor.id}/`, this.produtor)
-        .then(response => {
-          // Atualização bem-sucedida
-          console.log(response.data);
-          this.produtor = {
-            nomeProd: '',
-            cpf: null,
-            email: ''
-          }; // Limpar o objeto de produtor após a edição
-          this.isEdit = false; // Redefinir o estado de edição
-        })
-        .catch(error => {
-          // Erro ao atualizar
-          console.log(error);
-        }); */
     },
 
   }
@@ -238,10 +199,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* Base para aplicar a fonte em todo o componente */
 .container {
     font-family: 'Poppins', sans-serif;
     text-align: center;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-group label {
+  width: 60px; 
+  text-align: right;
+  margin-right: 15px; 
+  font-weight: bold;
 }
 
 button {
@@ -251,14 +229,14 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); /* verde */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
 
     &:hover {
-        background-color: #218838; /* verde escuro */
-        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); /* verde escuro */
+        background-color: #218838; 
+        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); 
     }
 }
 
@@ -267,13 +245,11 @@ div {
 }
 
 .botaoConfirmaDelete {
-    /* ... estilos existentes ... */
     background-color: rgba(0,0,0,0.7);
     color: #FFF;
 }
 
 .buttons-container {
-    /* ... estilos existentes ... */
     padding: 20px;
 }
 
@@ -286,43 +262,40 @@ h1 {
 }
 
 table {
-    /* ... estilos existentes ... */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     width: 100%;
 }
 
 .table {
-    width: 90%; /* Isso limita a tabela a 90% da largura do viewport, mas você pode ajustar conforme preferir */
-    margin: 0 auto; /* Isso centraliza a div da tabela */
+    width: 90%; 
+    margin: 0 auto; 
 }
 
 th, td {
-    /* ... estilos existentes ... */
     font-weight: 400;
 }
 
 th {
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
 }
 
 tr:nth-child(odd) {
-    background-color: #e6f4ea; /* verde claro */
+    background-color: #e6f4ea; 
 }
 
 tr:hover {
-    background-color: #d1ecd5; /* verde mais claro */
+    background-color: #d1ecd5; 
 }
 
 .container {
-    /* ... estilos existentes ... */
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background-color: #FFF;
 }
 
 form, .table, .botaoConfirmaDelete {
-    display: inline-block;
+    
     width: 100%;
     text-align: center;
 }
@@ -330,6 +303,10 @@ form, .table, .botaoConfirmaDelete {
 
 h1, h2 {
     width: 100%;
+}
+
+h2 {
+  text-align: center;
 }
 
 </style>

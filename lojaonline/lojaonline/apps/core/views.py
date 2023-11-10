@@ -8,9 +8,6 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 
-#- Tabela 1 - Produtor Rural (Nome, CPF, e-mail).
-#- Tabela 2 - Propriedade Rural (Nome, Produtor)
-
 #PRODUTOR
 def lista_produtores(request):
     template_name = 'core/produtores.html'

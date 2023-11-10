@@ -4,36 +4,36 @@
       <h2>Cadastro de Venda de Animal</h2>
       <form @submit.prevent="submitForm">
 
-        <div>
-          <label for="finalidadeAnimalVenda">Finalidade do Animal:</label>
+        <div class="form-group">
+          <label for="finalidadeAnimalVenda">Finalidade</label>
           <input type="finalidadeAnimalVenda" id="finalidadeAnimalVenda" v-model="venda.finalidadeAnimalVenda" required>
         </div>
-        <div>
-          <label for="valorAnimalVenda">Valor do Animal:</label>
+        <div class="form-group">
+          <label for="valorAnimalVenda">Valor (R$)</label>
           <input type="valorAnimalVenda" id="valorAnimalVenda" v-model="venda.valorAnimalVenda" required>
         </div>
-        <div>
-          <label for="dataVenda">Data da venda do Animal:</label>
+        <div class="form-groupData">
+          <label for="dataVenda">Data da venda</label>
           <input type="date" id="dataVenda" v-model="venda.dataVenda" required>
         </div>
-        <div>
-          <label for="dataRecebimento">Data do recebimento do dinheiro:</label>
+        <div class="form-groupData">
+          <label for="dataRecebimento">Data do recebimento</label>
           <input type="date" id="dataRecebimento" v-model="venda.dataRecebimento" required>
         </div>
-        <div>
-          <label for="pesoAnimalVenda">Peso atual do Animal:</label>
+        <div class="form-group">
+          <label for="pesoAnimalVenda">Peso atual do Animal (kg)</label>
           <input type="pesoAnimalVenda" id="pesoAnimalVenda" v-model="venda.pesoAnimalVenda" required>
         </div>
-        <div>
-          <label for="precoAtualArrobaKg">Preço atual da @:</label>
+        <div class="form-group">
+          <label for="precoAtualArrobaKg">Preço da @ (R$)</label>
           <input type="precoAtualArrobaKg" id="precoAtualArrobaKg" v-model="venda.precoAtualArrobaKg" required>
         </div>
-        <div>
-          <label for="observacaoVenda">Observações da venda:</label>
+        <div class="form-group">
+          <label for="observacaoVenda">Observações</label>
           <input type="observacaoVenda" id="observacaoVenda" v-model="venda.observacaoVenda" required>
         </div>
-        <div>
-        <label for="idAnimalVenda">ID Brinco Animal:</label>
+        <div class="left-label">
+        <label for="idAnimalVenda">Brinco Animal&nbsp;</label>
           <select id="idAnimalVenda" v-model="venda.idAnimalVenda" required>
             <option value="">Selecione um animal</option>
             <option v-for="idAnimalVenda in animais" :value="idAnimalVenda.id" :key="idAnimalVenda.id">{{ idAnimalVenda.brinco }}</option>
@@ -52,11 +52,11 @@
           <thead>
             <tr>
               <th>Finalidade</th>
-              <th>Valor</th>
+              <th>Valor (R$)</th>
               <th>Data da venda</th>
               <th>Data do recebimento</th>
-              <th>Peso ao ser vendido</th>
-              <th>Arroba</th>
+              <th>Peso ao ser vendido (kg)</th>
+              <th>Arroba (R$)</th>
               <th>Observações</th>
               <th>ID Brinco</th>
               <th>Ações</th>
@@ -125,7 +125,6 @@
   //adicionar
   submitForm() {
     if (this.isEdit) {
-      //axios.put(`http://localhost:8000/produtores/${this.produtor.id}/editar/`, this.produtor)
       axios.put(`http://localhost:8000/vendas/editar/${this.venda.id}/`, this.venda)
         .then(response => {
           this.vendas = response.data;
@@ -139,7 +138,6 @@
             precoAtualArrobaKg: '',
             observacaoVenda: '',
             idAnimalVenda: this.idAnimalVenda.id
-            //idAnimalVenda: this.venda.idAnimalVenda
           };
         })
         .catch(error => {
@@ -158,7 +156,6 @@
             precoAtualArrobaKg: '',
             observacaoVenda: '',
             idAnimalVenda: this.idAnimalVenda.id
-            //idAnimalVenda: this.venda.idAnimalVenda
           };
         })
         .catch(error => {
@@ -215,15 +212,7 @@
           })
       }
     },
-    /*mounted() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      if (id) {
-        this.isEdit = true
-        this.fetchProdutor(id)
-      }
-    }*/
-    
+
     mounted() {
         axios.get('http://localhost:8000/vendas/')
         .then(response => {
@@ -259,10 +248,54 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* Base para aplicar a fonte em todo o componente */
+
 .container {
     font-family: 'Poppins', sans-serif;
     text-align: center;
+}
+
+.left-label {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: -8px; 
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-group label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
+}
+
+.form-groupData {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 490px;
+}
+
+.form-groupDatainput {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-groupData label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
 }
 
 button {
@@ -272,14 +305,14 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); /* verde */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); 
 
     &:hover {
-        background-color: #218838; /* verde escuro */
-        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); /* verde escuro */
+        background-color: #218838; 
+        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); 
     }
 }
 
@@ -288,13 +321,11 @@ div {
 }
 
 .botaoConfirmaDelete {
-    /* ... estilos existentes ... */
     background-color: rgba(0,0,0,0.7);
     color: #FFF;
 }
 
 .buttons-container {
-    /* ... estilos existentes ... */
     padding: 20px;
 }
 
@@ -307,43 +338,40 @@ h1 {
 }
 
 table {
-    /* ... estilos existentes ... */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 100%;
+    width: 175%;
 }
 
 .table {
-    width: 90%; /* Isso limita a tabela a 90% da largura do viewport, mas você pode ajustar conforme preferir */
-    margin: 0 auto; /* Isso centraliza a div da tabela */
+    width: 175%;
+    margin: 0 auto;
 }
 
 th, td {
-    /* ... estilos existentes ... */
     font-weight: 400;
 }
 
 th {
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
 }
 
 tr:nth-child(odd) {
-    background-color: #e6f4ea; /* verde claro */
+    background-color: #e6f4ea; 
 }
 
 tr:hover {
-    background-color: #d1ecd5; /* verde mais claro */
+    background-color: #d1ecd5;
 }
 
 .container {
-    /* ... estilos existentes ... */
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background-color: #FFF;
 }
 
 form, .table, .botaoConfirmaDelete {
-    display: inline-block;
+    
     width: 100%;
     text-align: center;
 }
@@ -351,6 +379,10 @@ form, .table, .botaoConfirmaDelete {
 
 h1, h2 {
     width: 100%;
+}
+
+h2 {
+  text-align: center;
 }
 
 </style>

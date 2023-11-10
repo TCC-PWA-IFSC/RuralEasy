@@ -3,74 +3,82 @@
     <div class="container">
       <h2>Cadastro de Animal</h2>
       <form @submit.prevent="submitForm">
-        <div>
-        <label for="raca">Raça:</label>
+        <div class="left-label">
+        <label for="raca">Raça&nbsp;</label>
           <select id="raca" v-model="animal.idRaca" required>
             <option value="">Selecione uma raça</option>
             <option v-for="idRaca in racas" :value="idRaca.id" :key="idRaca.id">{{ idRaca.nomeRaca }}</option>
           </select>
         </div>
-        <div>
-          <label for="observacoesRaca">Observações (Raça):</label>
+        <div class="form-group">
+          <label for="observacoesRaca">Observações (Raça)</label>
           <input type="observacoesRaca" id="observacoesRaca" v-model="animal.observacoesRaca" required>
         </div>
-        <div>
-          <label for="sexo">Sexo:</label>
-          <input type="sexo" id="sexo" v-model="animal.sexo" required>
+        <div class="left-label">
+        <label for="sexo">Sexo&nbsp;&nbsp;</label>
+          <select id="sexo" v-model="animal.sexo" required>
+            <option value="">Selecione um sexo</option>
+            <option v-for="sexo in sexoOp" :value="sexo" :key="sexo">{{ sexo }}</option>
+          </select>
         </div>
-        <div>
-          <label for="peso">Peso:</label>
+        &nbsp;
+        <div class="form-group">
+          <label for="peso">Peso (kg)</label>
           <input type="peso" id="peso" v-model="animal.peso" required>
         </div>
-        <div>
-          <label for="dataNascimento">Data de Nascimento:</label>
-          <input type="date" id="dataNascimento" v-model="animal.dataNascimento" required>
-        </div>
-        <div>
-          <label for="dataMorte">Data de Óbito:</label>
-          <input type="date" id="dataMorte" v-model="animal.dataMorte" required>
-        </div>
-        <div>
-          <label for="observacoes">Observações gerais sobre o animal:</label>
+        <div class="form-group">
+          <label for="observacoes">Observações gerais</label>
           <input type="observacoes" id="observacoes" v-model="animal.observacoes" required>
         </div>
-        <div>
-          <label for="rfid">RFID:</label>
+        <div class="form-group">
+          <label for="rfid">RFID</label>
           <input type="rfid" id="rfid" v-model="animal.rfid" required>
         </div>
-        <div>
-        <label for="propriedade">Propriedade:</label>
+        <div class="form-group">
+          <label for="animal_Pai">Pai do Animal</label>
+          <input type="animal_Pai" id="animal_Pai" v-model="animal.animal_Pai">
+        </div>
+        <div class="form-group">
+          <label for="numeroGestacoes">Número de Gestações</label>
+          <input type="number" id="numeroGestacoes" v-model="animal.numeroGestacoes">
+        </div>
+        <div class="form-group">
+          <label for="brinco">Brinco&nbsp;</label>
+          <input type="brinco" id="brinco" v-model="animal.brinco" required>
+        </div>
+
+
+        <div class="left-label1">
+        <label for="propriedade">Propriedade&nbsp;</label>
           <select id="propriedade" v-model="animal.idProp" required>
             <option value="">Selecione uma propriedade</option>
             <option v-for="idProp in propriedades" :value="idProp.id" :key="idProp.id">{{ idProp.nomeProp }}</option>
           </select>
         </div>
-        <div>
-        <label for="idAnimalMae">Mãe do Animal:</label>
+        <div class="left-label2">
+        <label for="idAnimalMae">Mãe do Animal&nbsp;</label>
           <select id="idAnimalMae" v-model="animal.idAnimalMae" required>
             <option value="">Selecione um animal:</option>
             <option v-for="idAnimalMae in animais" :value="idAnimalMae.id" :key="idAnimalMae.id">{{ idAnimalMae.brinco }}</option>
           </select>
         </div>
-        <div>
-          <label for="animal_Pai">Pai do Animal:</label>
-          <input type="animal_Pai" id="animal_Pai" v-model="animal.animal_Pai">
-        </div>
-        <div>
-          <label for="numeroGestacoes">Número de Gestações:</label>
-          <input type="number" id="numeroGestacoes" v-model="animal.numeroGestacoes">
-        </div>
-        <div>
-        <label for="lote">Lote:</label>
+        <div class="left-label3">
+        <label for="lote">Lote&nbsp;</label>
           <select id="lote" v-model="animal.idLote" required>
             <option value="">Selecione o lote:</option>
             <option v-for="idLote in lotes" :value="idLote.id" :key="idLote.id">{{ idLote.nomeLote }}</option>
           </select>
         </div>
-        <div>
-          <label for="brinco">Brinco:</label>
-          <input type="brinco" id="brinco" v-model="animal.brinco" required>
+
+        <div class="form-groupData">
+          <label for="dataNascimento">Nascimento:</label>
+          <input type="date" id="dataNascimento" v-model="animal.dataNascimento" required>
         </div>
+        <div class="form-groupData">
+          <label for="dataMorte">Óbito:</label>
+          <input type="date" id="dataMorte" v-model="animal.dataMorte">
+        </div>
+
         <button type="submit">Salvar</button>
         <button v-if="isEdit" @click.prevent="deleteAnimal">Excluir</button>
         <button v-if="isEdit" @click.prevent="cancelEdit">Cancelar</button>
@@ -85,7 +93,7 @@
             <th>Raça</th>
             <th>Observações Raça</th>
             <th>Sexo</th>
-            <th>Peso</th>
+            <th>Peso (kg)</th>
             <th>Nascimento</th>
             <th>Óbito</th>
             <th>Observações gerais</th>
@@ -111,8 +119,11 @@
             <td>{{ animal.rfid }}</td>
             <td>{{ getPropById(animal.idProp) }}</td>
             <td>{{ getAnimalById(animal.idAnimalMae) }}</td>
+            <td>{{ animal.animal_Pai }}</td>
+            <td>{{ animal.numeroGestacoes }}</td>
             <td>{{ getLoteById(animal.idLote) }}</td>
             <td>{{ animal.brinco }}</td>
+
             
             <td>
               <button @click.prevent="editAnimal(animal)">Editar</button>
@@ -157,6 +168,7 @@
           numeroGestacoes:''
         },
         animais: [],
+        sexoOp: ['Masculino', 'Feminino'],
         racas: [],
         lotes: [],
         propriedades: [],
@@ -167,7 +179,7 @@
     },
     methods: {
   
-       //editar 
+  //editar 
   editAnimal(animal) {
     this.isEdit = true;
     this.animal = { ...animal};
@@ -277,14 +289,6 @@
           })
       }
     },
-    /*mounted() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      if (id) {
-        this.isEdit = true
-        this.fetchProdutor(id)
-      }
-    }*/
     
     mounted() {
       axios.get('http://localhost:8000/animais/')
@@ -315,31 +319,6 @@
         .catch(error => {
           console.log(error)
         })
-
-        /*post
-        axios.post('/api/produtores/', this.form)
-        .then(response => {
-          this.form = response.data
-        })
-        catch(error => {
-          console.log(error)
-        })
-  
-        axios.put(`http://localhost:8000/produtores/${this.produtor.id}/`, this.produtor)
-        .then(response => {
-          // Atualização bem-sucedida
-          console.log(response.data);
-          this.produtor = {
-            nomeProd: '',
-            cpf: null,
-            email: ''
-          }; // Limpar o objeto de produtor após a edição
-          this.isEdit = false; // Redefinir o estado de edição
-        })
-        .catch(error => {
-          // Erro ao atualizar
-          console.log(error);
-        }); */
     },
 
   computed: {
@@ -379,10 +358,75 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* Base para aplicar a fonte em todo o componente */
+
 .container {
     font-family: 'Poppins', sans-serif;
     text-align: center;
+}
+
+.left-label {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: 63px; 
+}
+
+.left-label1 {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: 5px; 
+}
+
+.left-label2 {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: -17px; 
+}
+
+.left-label3 {
+  text-align: left;
+  width: auto; 
+  font-weight: bold;
+  margin-left: 71px; 
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-group label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
+}
+
+.form-groupData {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 490px;
+}
+
+.form-groupDatainput {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-groupData label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
 }
 
 button {
@@ -392,14 +436,14 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #28a745; /* verde */
+    background-color: #28a745;
     color: #FFF;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); /* verde */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); 
 
     &:hover {
-        background-color: #218838; /* verde escuro */
-        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); /* verde escuro */
+        background-color: #218838; 
+        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); 
     }
 }
 
@@ -408,13 +452,11 @@ div {
 }
 
 .botaoConfirmaDelete {
-    /* ... estilos existentes ... */
     background-color: rgba(0,0,0,0.7);
     color: #FFF;
 }
 
 .buttons-container {
-    /* ... estilos existentes ... */
     padding: 20px;
 }
 
@@ -427,44 +469,40 @@ h1 {
 }
 
 table {
-    /* ... estilos existentes ... */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 100%;
+    width: 250%;
 }
 
 .table {
-    width: max-content; /* Isso faz com que a div contenha exatamente a largura da tabela */
-    margin: 0 auto; /* Isso centraliza a div em relação à página */
-    text-align: center;
+    width: 250%; 
+    margin: 0 auto; 
 }
 
 th, td {
-    /* ... estilos existentes ... */
     font-weight: 400;
 }
 
 th {
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
 }
 
 tr:nth-child(odd) {
-    background-color: #e6f4ea; /* verde claro */
+    background-color: #e6f4ea; 
 }
 
 tr:hover {
-    background-color: #d1ecd5; /* verde mais claro */
+    background-color: #d1ecd5;
 }
 
 .container {
-    /* ... estilos existentes ... */
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background-color: #FFF;
 }
 
 form, .table, .botaoConfirmaDelete {
-    display: inline-block;
+    
     width: 100%;
     text-align: center;
 }
@@ -472,7 +510,10 @@ form, .table, .botaoConfirmaDelete {
 
 h1, h2 {
     width: 100%;
-    text-align: center;
+}
+
+h2 {
+  text-align: center;
 }
 
 </style>

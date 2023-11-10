@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 import datetime
-#from core.forms import AnimalFormLazy
 
 ##tcc
 
@@ -176,17 +175,6 @@ class AplicarProdutoSanitario(models.Model):
         return self.observacao
 
 class CompraProdutos(models.Model):
-    #idProduto = models.ForeignKey(ProdSanitario, on_delete=models.CASCADE, blank=True, null=True)
-    #valorUnitario = models.FloatField(default='0.0')
-    #qtdComprada = models.IntegerField(default='0')
-    #dataCompra = models.DateField (default=datetime.date.today)
-    #descricao = models.CharField(max_length=100, default='Padrao')
-    #valorTotal = models.FloatField(default='0.0')
-    #validade = models.DateField (default=datetime.date.today)
-    #content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    #object_id = models.PositiveIntegerField()
-    #idProduto = GenericForeignKey('content_type', 'object_id')
-
     idProduto = models.CharField(max_length=100, default='Padrao')
     valorUnitario = models.FloatField(default='0.0')
     qtdComprada = models.IntegerField(default='0')

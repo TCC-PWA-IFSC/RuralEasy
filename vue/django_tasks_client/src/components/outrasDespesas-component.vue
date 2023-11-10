@@ -3,36 +3,35 @@
       <h2>Cadastro de Outra Despesa</h2>
       <form @submit.prevent="submitForm">
 
-        <div>
-          <label for="descricaoOutraDespesa">Descrição da despesa:</label>
+        <div class="form-group">
+          <label for="descricaoOutraDespesa">Descrição</label>
           <input type="text" id="descricaoOutraDespesa" v-model="outraDespesa.descricaoOutraDespesa" required>
         </div>
 
-        <div>
-          <label for="motivoGasto">Motivo da despesa:</label>
+        <div class="form-group">
+          <label for="motivoGasto">Motivo</label>
           <input type="text" id="motivoGasto" v-model="outraDespesa.motivoGasto" required>
         </div>
 
-        <div>
-        <label for="propriedade">Propriedade:</label>
+        <div class="left-label">
+        <label for="propriedade">Propriedade&nbsp;</label>
           <select id="propriedade" v-model="outraDespesa.idPropOutraDespesa" required>
             <option value="">Selecione uma propriedade</option>
             <option v-for="idPropOutraDespesa in propriedades" :value="idPropOutraDespesa.id" :key="idPropOutraDespesa.id">{{ idPropOutraDespesa.nomeProp }}</option>
           </select>
         </div>
 
-        <div>
-          <label for="valorOutraDespesa">Valor:</label>
+        <div class="form-group">
+          <label for="valorOutraDespesa">Valor (R$)</label>
           <input type="valorOutraDespesa" id="valorOutraDespesa" v-model="outraDespesa.valorOutraDespesa" required>
         </div>
         
-        <div>
-          <label for="dataDespesa">Data:</label>
+        <div class="form-groupData">
+          <label for="dataDespesa">Data</label>
           <input type="date" id="dataDespesa" v-model="outraDespesa.dataDespesa" required>
         </div>
 
         <button type="submit">Salvar</button>
-        <!--<button v-if="isEdit" @click.prevent="deletePropriedade">Excluir</button>-->
         <button v-if="isEdit" @click.prevent="cancelEdit">Cancelar</button>
       </form>
     </div>
@@ -45,7 +44,7 @@
       <tr>
         <th>Descrição da despesa</th>
         <th>Motivo da despesa</th>
-        <th>Valor</th>
+        <th>Valor (R$)</th>
         <th>Data</th>
         <th>Propriedade</th>
         <th>Ações</th>
@@ -59,8 +58,8 @@
         <td>{{ outraDespesa.dataDespesa }}</td>
         <td>{{ getPropriedadeNameById(outraDespesa.idPropOutraDespesa) }}</td>
         <td>
-          <button @click.prevent="editOutraDespesa(outraDespesa)" class="action"><img src="../assets/img/pencil.png" class="icon"></button>
-          <button @click.prevent="confirmDelete(outraDespesa)" class="action"><img src="../assets/img/trash.png" class="icon"></button>
+          <button @click.prevent="editOutraDespesa(outraDespesa)" class="action">Editar</button>
+          <button @click.prevent="confirmDelete(outraDespesa)" class="action">Excluir</button>
         </td>
       </tr>
     </tbody>
@@ -96,7 +95,7 @@
     },
     methods: {
   
-       //editar 
+  //editar 
   editOutraDespesa(outraDespesa) {
     this.isEdit = true;
     this.outraDespesa = { ...outraDespesa };
@@ -152,11 +151,6 @@
             console.log(error)
           })
       },
-      //confirmDelete(propriedade) {
-      //  console.log("Que tem aqui?", propriedade)
-      //  this.showDeleteModal = true
-      //  this.propriedadeToDelete = propriedade
-      //}
       confirmDelete(outraDespesa) {
         if (window.confirm("Você tem certeza de que deseja excluir esta despesa?")) {
           this.outraDespesaToDelete = outraDespesa;
@@ -192,14 +186,6 @@
           })
       }
     },
-    /*mounted() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      if (id) {
-        this.isEdit = true
-        this.fetchProdutor(id)
-      }
-    }*/
     
     mounted() {
       axios.get('http://localhost:8000/propriedades/')
@@ -216,31 +202,6 @@
         .catch(error => {
           console.log(error)
         })
-  
-        /*post
-        axios.post('/api/produtores/', this.form)
-        .then(response => {
-          this.form = response.data
-        })
-        catch(error => {
-          console.log(error)
-        })
-  
-        axios.put(`http://localhost:8000/produtores/${this.produtor.id}/`, this.produtor)
-        .then(response => {
-          // Atualização bem-sucedida
-          console.log(response.data);
-          this.produtor = {
-            nomeProd: '',
-            cpf: null,
-            email: ''
-          }; // Limpar o objeto de produtor após a edição
-          this.isEdit = false; // Redefinir o estado de edição
-        })
-        .catch(error => {
-          // Erro ao atualizar
-          console.log(error);
-        }); */
     },
 
     computed: {
@@ -259,10 +220,53 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
-/* Base para aplicar a fonte em todo o componente */
 .container {
     font-family: 'Poppins', sans-serif;
     text-align: center;
+}
+
+.left-label {
+  text-align: left;
+  width: auto;
+  font-weight: bold;
+  margin-left: 6px; 
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  flex: 1;
+  padding: 5px; 
+}
+
+.form-group label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
+}
+
+.form-groupData {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 490px;
+}
+
+.form-groupDatainput {
+  flex: 1; 
+  padding: 5px; 
+}
+
+.form-groupData label {
+  width: 100px; 
+  text-align: right;
+  margin-right: 10px; 
+  font-weight: bold;
 }
 
 button {
@@ -272,14 +276,14 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); /* verde */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1); 
 
     &:hover {
-        background-color: #218838; /* verde escuro */
-        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2); /* verde escuro */
+        background-color: #218838; 
+        box-shadow: 0 4px 12px rgba(33, 136, 56, 0.2);
     }
 }
 
@@ -288,13 +292,11 @@ div {
 }
 
 .botaoConfirmaDelete {
-    /* ... estilos existentes ... */
     background-color: rgba(0,0,0,0.7);
     color: #FFF;
 }
 
 .buttons-container {
-    /* ... estilos existentes ... */
     padding: 20px;
 }
 
@@ -307,43 +309,40 @@ h1 {
 }
 
 table {
-    /* ... estilos existentes ... */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    width: 100%;
+    width: 175%;
 }
 
 .table {
-    width: 90%; /* Isso limita a tabela a 90% da largura do viewport, mas você pode ajustar conforme preferir */
-    margin: 0 auto; /* Isso centraliza a div da tabela */
+    width: 175%; 
+    margin: 0 auto; 
 }
 
 th, td {
-    /* ... estilos existentes ... */
     font-weight: 400;
 }
 
 th {
-    background-color: #28a745; /* verde */
+    background-color: #28a745; 
     color: #FFF;
 }
 
 tr:nth-child(odd) {
-    background-color: #e6f4ea; /* verde claro */
+    background-color: #e6f4ea; 
 }
 
 tr:hover {
-    background-color: #d1ecd5; /* verde mais claro */
+    background-color: #d1ecd5; 
 }
 
 .container {
-    /* ... estilos existentes ... */
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     background-color: #FFF;
 }
 
 form, .table, .botaoConfirmaDelete {
-    display: inline-block;
+    
     width: 100%;
     text-align: center;
 }
@@ -353,17 +352,8 @@ h1, h2 {
     width: 100%;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 3em;
-}
-
-.action{
-  width: 2px;
-  height: 2px;
+h2 {
+  text-align: center;
 }
 
 </style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

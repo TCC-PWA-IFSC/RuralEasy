@@ -6,13 +6,9 @@ app_name= 'core'
 
 urlpatterns = [
     #PRODUTOR
-    #path('produtores/', views.lista_produtores, name='produtores'),
     path('produtores/produtor/<int:id_produtor>/',views.mostra_produtor,name='mostra_produtor'),
-    #path('propriedades/',views.lista_propriedades, name='lista_propriedades'),
     path('produtores/deleteprodutor/<int:produtor_id>/', delete_produtor, name='delete_produtor'),
     path('produtores/adicionarprodutor/<JsonResponse>/', views.adicionar_produtor, name='adicionar_produtor'),
-    #path('produtores/<int:pk>/editar/', views.editar_produtor, name='editar_produtor'),
-    #path('produtores/editar/<JsonResponse>', views.editar_produtor, name='editar_produtor'),
     path('produtores/editar/<int:pk>/', views.editar_produtor, name='editar_produtor'),
     path('produtores/', ProdutorRuralList.as_view()),
 
